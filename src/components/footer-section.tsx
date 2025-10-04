@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Home, Mail, Phone, MapPin, Facebook, Instagram, Twitter, Send, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Send, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import homestayData from "@/data/homestay-data";
+import formConfig from "@/data/form-config";
 
 export function FooterSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -44,15 +45,32 @@ export function FooterSection() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
+
+    try {
+      const googleForm = new FormData();
+
+      googleForm.append(formConfig.entryIds.name, formData.name);
+      googleForm.append(formConfig.entryIds.email, formData.email);
+      googleForm.append(formConfig.entryIds.message, formData.message);
+
+      await fetch(formConfig.submitUrl, {
+        method: "POST",
+        body: googleForm,
+        mode: "no-cors",
+      });
+
+      alert(formConfig.messages.success);
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("❌ Lỗi gửi form:", error);
+      alert(formConfig.messages.error);
+    }
   };
 
   return (
     <footer id="contact" ref={sectionRef} className="bg-background border-t border-border">
-      {/* Contact Section */}
       <div className="py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -61,24 +79,22 @@ export function FooterSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Get in Touch
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Ready to start your homestay adventure? We are here to help you find the perfect home
               away from home
             </p>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-            {/* Contact Information */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -50 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
               <h3 className="text-2xl font-bold text-foreground mb-8">Contact Information</h3>
-
               <div className="space-y-6">
                 {[
                   {
@@ -123,7 +139,6 @@ export function FooterSection() {
                 ))}
               </div>
 
-              {/* Business Hours */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
@@ -151,7 +166,6 @@ export function FooterSection() {
               </motion.div>
             </motion.div>
 
-            {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : 50 }}
@@ -212,7 +226,7 @@ export function FooterSection() {
                         name="message"
                         value={formData.message}
                         onChange={handleInputChange}
-                        placeholder="Tell us about your travel plans and preferences..."
+                        placeholder="Tell us about your travel plans..."
                         className="w-full min-h-[120px] resize-none"
                         required
                       />
