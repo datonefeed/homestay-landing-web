@@ -5,6 +5,7 @@ import { TestimonialsSection } from "@/components/testimonials-section";
 import { PricingSection } from "@/components/pricing-section";
 import { FooterSection } from "@/components/footer-section";
 import { Header } from "@/components/header";
+import { FloatingContact } from "@/components/floating-contact";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,12 @@ export default function HomePage() {
       <TestimonialsSection />
       <PricingSection />
       <FooterSection />
+      <FloatingContact
+        facebookPageId="753011397903670"
+        phoneNumber="+84123456789"
+        email="contact@homestay.com"
+        defaultMessage="Chào bạn! Tôi muốn tìm hiểu về homestay của bạn."
+      />
     </main>
   );
 }

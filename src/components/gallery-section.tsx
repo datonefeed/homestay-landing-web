@@ -87,7 +87,7 @@ export function GallerySection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-black text-[#43261b]/85 leading-none tracking-tighter relative self-start z-10"
+            className="text-5xl sm:text-6xl lg:text-7xl font-black text-primary leading-none tracking-tighter relative self-start z-10"
             style={{
               fontFamily: "system-ui, -apple-system, sans-serif",
               textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
@@ -99,7 +99,7 @@ export function GallerySection() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="text-5xl sm:text-6xl  lg:text-7xl font-black text-[#43261b]/90 leading-none tracking-tighter  self-end  relative z-0 text-end"
+            className="text-5xl sm:text-6xl  lg:text-7xl font-black text-primary  leading-none tracking-tighter  self-end  relative z-0 text-end"
             style={{
               fontFamily: "system-ui, -apple-system, sans-serif",
               textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
