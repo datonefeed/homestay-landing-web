@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Home, MapPin, Heart, DollarSign } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import homestayData from "@/data/homestay-data";
 
 const iconMap = {
@@ -14,6 +15,12 @@ const iconMap = {
 };
 
 export function FeaturesSection() {
+  const t = useTranslations("FeaturesSection");
+  const features = t.raw("features") as {
+    icon: string;
+    title: string;
+    description: string;
+  }[];
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -44,16 +51,15 @@ export function FeaturesSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-            Why Choose Our Homestays?
+            {t("title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            Experience authentic hospitality and create lasting memories with our carefully selected
-            host families
+            {t("description")}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {homestayData.features.map((feature, index) => {
+          {features.map((feature, index) => {
             const IconComponent = iconMap[feature.icon as keyof typeof iconMap];
 
             return (
@@ -95,10 +101,10 @@ export function FeaturesSection() {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
         >
           {[
-            { number: "500+", label: "Happy Guests" },
-            { number: "50+", label: "Host Families" },
-            { number: "25+", label: "Destinations" },
-            { number: "4.9", label: "Average Rating" },
+            { number: "500+", label: t("stats.happyGuests") },
+            { number: "50+", label: t("stats.hostFamilies") },
+            { number: "25+", label: t("stats.destinations") },
+            { number: "4.9", label: t("stats.averageRating") },
           ].map((stat, index) => (
             <motion.div
               key={index}

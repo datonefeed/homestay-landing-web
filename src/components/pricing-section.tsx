@@ -5,9 +5,22 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Check, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import homestayData from "@/data/homestay-data";
+import { p } from "framer-motion/client";
 
 export function PricingSection() {
+  const t = useTranslations("PricingSection");
+  const pricing = t.raw("pricing") as {
+    name: string;
+    price: string;
+    period: string;
+    features: string[];
+    popular?: boolean;
+  }[];
+  const items = t.raw("included.items") as {
+    title: string;
+  }[];
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -38,16 +51,15 @@ export function PricingSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-            Choose Your Perfect Stay
+            {t("title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            Transparent pricing with no hidden fees. All rates include breakfast, WiFi, and local
-            guidance
+            {t("description")}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {homestayData.pricing.map((plan, index) => (
+          {pricing.map((plan, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
@@ -74,7 +86,7 @@ export function PricingSection() {
                   <div className="absolute top-0 left-0 right-0">
                     <div className="bg-primary text-primary-foreground text-center py-2 text-sm font-semibold">
                       <Star className="inline h-4 w-4 mr-1" />
-                      Most Popular
+                      {t("mostPopular")}
                     </div>
                   </div>
                 )}
@@ -86,19 +98,6 @@ export function PricingSection() {
                     <span className="text-4xl font-bold text-primary">{plan.price}</span>
                     <span className="text-muted-foreground ml-2">{plan.period}</span>
                   </div>
-
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button
-                      className={`w-full ${
-                        plan.popular
-                          ? "bg-primary hover:bg-primary/90 text-primary-foreground"
-                          : "bg-secondary hover:bg-secondary/80 text-secondary-foreground"
-                      }`}
-                      size="lg"
-                    >
-                      Book Now
-                    </Button>
-                  </motion.div>
                 </CardHeader>
 
                 <CardContent className="px-8 pb-8">
@@ -147,16 +146,14 @@ export function PricingSection() {
           className="mt-16 text-center"
         >
           <div className="bg-card rounded-2xl p-8 max-w-4xl mx-auto border border-border/50">
-            <h3 className="text-xl font-semibold text-foreground mb-4">
-              What is Included in Every Stay
-            </h3>
+            <h3 className="text-xl font-semibold text-foreground mb-4">{t("included.title")}</h3>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {[
-                { icon: "🏠", title: "Clean & Comfortable Room" },
-                { icon: "🍳", title: "Daily Breakfast" },
-                { icon: "📶", title: "Free WiFi" },
-                { icon: "🗺️", title: "Local Guidance" },
+                { icon: "🏠", title: items[0] },
+                { icon: "🍳", title: items[1] },
+                { icon: "📶", title: items[2] },
+                { icon: "🗺️", title: items[3] },
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -172,17 +169,23 @@ export function PricingSection() {
                   className="text-center"
                 >
                   <div className="text-2xl mb-2">{item.icon}</div>
-                  <div className="text-sm text-muted-foreground font-medium">{item.title}</div>
+                  <div className="text-sm text-muted-foreground font-medium">
+                    {items[index].title}
+                  </div>
                 </motion.div>
               ))}
             </div>
 
             <div className="mt-6 pt-6 border-t border-border">
               <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">Free cancellation</span> up to 24
-                hours before check-in •
-                <span className="font-semibold text-foreground ml-1">No booking fees</span> •
-                <span className="font-semibold text-foreground ml-1">24/7 support</span>
+                <span className="font-semibold text-foreground">
+                  {t("included.freeCancellation")}
+                </span>{" "}
+                {t("included.cancellationPeriod")} •
+                <span className="font-semibold text-foreground ml-1">
+                  {t("included.noBookingFees")}
+                </span>{" "}
+                •<span className="font-semibold text-foreground ml-1">{t("included.support")}</span>
               </p>
             </div>
           </div>

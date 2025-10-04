@@ -1,0 +1,230 @@
+{
+  "HeaderSection": {
+    "brandName": "QHOME",
+    "nav": {
+      "home": "Trang chủ",
+      "features": "Tính năng",
+      "gallery": "Thư viện",
+      "reviews": "Đánh giá",
+      "pricing": "Bảng giá",
+      "contact": "Liên hệ"
+    },
+    "bookNowButton": "Đặt ngay"
+  },
+  "HeroSection": {
+    "title": "Homestay mơ ước của bạn đang chờ đón",
+    "subtitle": "Bất động sản cao cấp",
+    "scrollToExpand": "Cuộn để khám phá"
+  },
+  "FeaturesSection": {
+    "title": "Tại sao chọn homestay của chúng tôi?",
+    "description": "Trải nghiệm lòng hiếu khách chân thực và tạo nên những kỷ niệm đáng nhớ với các gia đình chủ nhà được lựa chọn cẩn thận",
+    "features": [
+      {
+    "icon": "Home",
+    "title": "Trải Nghiệm Địa Phương Thực Thụ",
+    "description": "Ở cùng các gia đình bản địa và hòa mình vào những trải nghiệm văn hóa chân thực"
+  },
+  {
+    "icon": "MapPin",
+    "title": "Vị Trí Đắc Địa",
+    "description": "Những ngôi nhà được chọn lọc kỹ lưỡng nằm tại trung tâm khu phố sôi động và cảnh đẹp thiên nhiên"
+  },
+  {
+    "icon": "Heart",
+    "title": "Thoải Mái & Chu Đáo",
+    "description": "Thưởng thức bữa ăn nhà nấu, phòng nghỉ ấm cúng và sự quan tâm tận tình"
+  },
+  {
+    "icon": "DollarSign",
+    "title": "Giá Trị Tuyệt Vời",
+    "description": "Giá cả hợp lý bao gồm bữa sáng, WiFi và hướng dẫn địa phương"
+  }
+    ],
+    "stats": {
+      "happyGuests": "Khách hàng hài lòng",
+      "hostFamilies": "Gia đình chủ nhà",
+      "destinations": "Điểm đến",
+      "averageRating": "Điểm đánh giá trung bình"
+    }
+  },
+  "GallerySection": {
+    "explore": "KHÁM PHÁ",
+    "goodPlaces": "NHỮNG NƠI TUYỆT VỜI",
+    "gallery": [
+      
+        {
+          "image": "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg",
+          "title": "Phòng Ngủ Tiện Nghi",
+          "description": "Nghỉ ngơi trong không gian được thiết kế tinh tế và ấm cúng"
+        },
+        {
+          "image": "https://images.pexels.com/photos/5661718/pexels-photo-5661718.jpeg",
+          "title": "Phòng Ăn Chung",
+          "description": "Thưởng thức bữa ăn cùng gia đình chủ nhà"
+        },
+        {
+          "image": "https://images.pexels.com/photos/10071390/pexels-photo-10071390.jpeg",
+          "title": "Khung Cảnh Tuyệt Đẹp",
+          "description": "Thức dậy giữa khung cảnh thiên nhiên hùng vĩ và trong lành"
+        },
+        {
+          "image": "https://images.pexels.com/photos/15720195/pexels-photo-15720195.jpeg",
+          "title": "Khu Sinh Hoạt Chung",
+          "description": "Thư giãn trong không gian chung thân thiện và thoải mái"
+        }
+      
+
+    ]
+  },
+  
+  "TestimonialsSection": {
+    "title": "Khách hàng của chúng tôi nói gì",
+    "description": "Trải nghiệm thực tế từ những du khách đã ở cùng các gia đình chủ nhà của chúng tôi trên khắp thế giới",
+    "testimonials": [
+      {
+        "quote": "Sự chú trọng đến từng chi tiết và các tính năng sáng tạo đã hoàn toàn thay đổi quy trình làm việc của chúng tôi. Đây chính là giải pháp mà chúng tôi tìm kiếm bấy lâu.",
+        "name": "Sarah Chen",
+        "designation": "Quản lý Sản phẩm tại TechFlow",
+        "src": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      },
+      {
+        "quote": "Việc triển khai diễn ra suôn sẻ và kết quả vượt ngoài mong đợi. Tính linh hoạt của nền tảng thật đáng kinh ngạc.",
+        "name": "Michael Rodriguez",
+        "designation": "Giám đốc Công nghệ tại InnovateSphere",
+        "src": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      },
+      {
+        "quote": "Giải pháp này đã giúp cải thiện đáng kể năng suất làm việc của đội ngũ chúng tôi. Giao diện trực quan giúp các tác vụ phức tạp trở nên đơn giản hơn.",
+        "name": "Emily Watson",
+        "designation": "Giám đốc Vận hành tại CloudScale",
+        "src": "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      },
+      {
+        "quote": "Dịch vụ hỗ trợ tuyệt vời cùng các tính năng mạnh mẽ. Hiếm có sản phẩm nào thực hiện đúng mọi cam kết như thế này.",
+        "name": "James Kim",
+        "designation": "Trưởng nhóm Kỹ thuật tại DataPro",
+        "src": "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      },
+      {
+        "quote": "Khả năng mở rộng và hiệu suất đã thay đổi hoàn toàn cách vận hành của tổ chức chúng tôi. Rất đáng để các doanh nghiệp đang phát triển tham khảo.",
+        "name": "Lisa Thompson",
+        "designation": "Phó Chủ tịch Công nghệ tại FutureNet",
+        "src": "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      }
+    ]
+  },
+  "PricingSection": {
+    "title": "Chọn kỳ nghỉ hoàn hảo của bạn",
+    "description": "Giá cả minh bạch không có phí ẩn. Tất cả giá bao gồm bữa sáng, WiFi và hướng dẫn địa phương",
+    "mostPopular": "Phổ biến nhất",
+    "pricing": [
+      {
+        "name": "Phòng Tiêu Chuẩn",
+        "price": "$45",
+        "period": "mỗi đêm",
+        "features": [
+          "Phòng ngủ riêng",
+          "Phòng tắm chung",
+          "Bao gồm bữa sáng",
+          "Truy cập WiFi",
+          "Hướng dẫn địa phương"
+        ],
+        "popular": false
+      },
+      {
+        "name": "Phòng Cao Cấp",
+        "price": "$65",
+        "period": "mỗi đêm",
+        "features": [
+          "Phòng ngủ riêng",
+          "Phòng tắm riêng",
+          "Bao gồm tất cả bữa ăn",
+          "Truy cập WiFi",
+          "Chuyến tham quan địa phương",
+          "Đón tại sân bay"
+        ],
+        "popular": true
+      },
+      {
+        "name": "Phòng Gia Đình",
+        "price": "$95",
+        "period": "mỗi đêm",
+        "features": [
+          "2 phòng ngủ",
+          "Phòng tắm riêng",
+          "Bao gồm tất cả bữa ăn",
+          "Truy cập WiFi",
+          "Chuyến tham quan địa phương",
+          "Đón tại sân bay",
+          "Dịch vụ giặt ủi"
+        ],
+        "popular": false
+      }
+    ],
+    "included": {
+      "title": "Những gì bao gồm trong mỗi kỳ nghỉ",
+      "items": [
+        { "title": "Phòng sạch sẽ & thoải mái" },
+        { "title": "Bữa sáng hàng ngày" },
+        { "title": "WiFi miễn phí" },
+        { "title": "Hướng dẫn địa phương" }
+      ],
+      "freeCancellation": "Hủy miễn phí",
+      "cancellationPeriod": "trước 24 giờ trước khi nhận phòng",
+      "noBookingFees": "Không có phí đặt phòng",
+      "support": "Hỗ trợ 24/7"
+    }
+  },
+  
+  "FooterSection": {
+    "title": "Liên hệ với chúng tôi",
+    "description": "Sẵn sàng bắt đầu hành trình homestay của bạn? Chúng tôi ở đây để giúp bạn tìm ngôi nhà lý tưởng xa nhà",
+    "contact": {
+      "title": "Thông tin liên hệ",
+      "items": [
+        { "title": "Email" },
+        { "title": "Điện thoại" },
+        { "title": "Địa chỉ" }
+      ],
+      "businessHours": {
+        "title": "Giờ làm việc",
+        "days": [
+          { "name": "Thứ Hai - Thứ Sáu", "hours": "9:00 Sáng - 6:00 Chiều" },
+          { "name": "Thứ Bảy", "hours": "10:00 Sáng - 4:00 Chiều" },
+          { "name": "Chủ Nhật", "hours": "Đóng cửa" }
+        ]
+      }
+    },
+    "form": {
+      "title": "Gửi tin nhắn cho chúng tôi",
+      "labels": {
+        "name": "Tên của bạn",
+        "email": "Địa chỉ email",
+        "message": "Tin nhắn"
+      },
+      "placeholders": {
+        "name": "Nhập họ và tên của bạn",
+        "email": "Nhập địa chỉ email của bạn",
+        "message": "Hãy cho chúng tôi biết về kế hoạch du lịch của bạn..."
+      },
+      "submitButton": "Gửi tin nhắn",
+      "messages": {
+        "success": "Tin nhắn của bạn đã được gửi thành công!",
+        "error": "Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại."
+      }
+    },
+    "bottom": {
+      "logo": "QHOME",
+      "links": {
+        "privacyPolicy": "Chính sách bảo mật",
+        "termsOfService": "Điều khoản dịch vụ",
+        "faq": "Câu hỏi thường gặp"
+      },
+      "copyright": "© {year} QHome. Mọi quyền được bảo lưu. Tạo nên với {heart} dành cho những du khách tìm kiếm trải nghiệm chân thực."
+    }
+  }
+
+
+
+}

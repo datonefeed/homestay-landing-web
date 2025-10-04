@@ -9,10 +9,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MapPin, Facebook, Instagram, Twitter, Send, Clock } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import homestayData from "@/data/homestay-data";
 import formConfig from "@/data/form-config";
 
 export function FooterSection() {
+  const t = useTranslations("FooterSection");
+  const contactItems = t.raw("contact.items") as {
+    title: string;
+  }[];
+  const days = t.raw("contact.businessHours.days") as {
+    name: string;
+    hours: string;
+  }[];
+
   const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -61,11 +71,11 @@ export function FooterSection() {
         mode: "no-cors",
       });
 
-      alert(formConfig.messages.success);
+      alert(t("form.messages.success"));
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("❌ Lỗi gửi form:", error);
-      alert(formConfig.messages.error);
+      alert(t("form.messages.error"));
     }
   };
 
@@ -80,11 +90,10 @@ export function FooterSection() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Get in Touch
+              {t("title")}
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Ready to start your homestay adventure? We are here to help you find the perfect home
-              away from home
+              {t("description")}
             </p>
           </motion.div>
 
@@ -94,24 +103,24 @@ export function FooterSection() {
               animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -50 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              <h3 className="text-2xl font-bold text-foreground mb-8">Contact Information</h3>
+              <h3 className="text-2xl font-bold text-foreground mb-8">{t("contact.title")}</h3>
               <div className="space-y-6">
                 {[
                   {
                     icon: Mail,
-                    title: "Email",
+                    title: contactItems[0],
                     content: homestayData.contact.email,
                     href: `mailto:${homestayData.contact.email}`,
                   },
                   {
                     icon: Phone,
-                    title: "Phone",
+                    title: contactItems[1],
                     content: homestayData.contact.phone,
                     href: `tel:${homestayData.contact.phone}`,
                   },
                   {
                     icon: MapPin,
-                    title: "Address",
+                    title: contactItems[2],
                     content: homestayData.contact.address,
                     href: "#",
                   },
@@ -127,7 +136,9 @@ export function FooterSection() {
                       <item.icon className="h-6 w-6 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
+                      <h4 className="font-semibold text-foreground mb-1">
+                        {contactItems[index].title}
+                      </h4>
                       <a
                         href={item.href}
                         className="text-muted-foreground hover:text-primary transition-colors duration-200"
@@ -147,21 +158,30 @@ export function FooterSection() {
               >
                 <div className="flex items-center space-x-3 mb-4">
                   <Clock className="h-5 w-5 text-primary" />
-                  <h4 className="font-semibold text-foreground">Business Hours</h4>
+                  <h4 className="font-semibold text-foreground">
+                    {t("contact.businessHours.title")}
+                  </h4>
                 </div>
                 <div className="space-y-2 text-sm text-muted-foreground">
-                  <div className="flex justify-between">
-                    <span>Monday - Friday</span>
-                    <span>9:00 AM - 6:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Saturday</span>
-                    <span>10:00 AM - 4:00 PM</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Sunday</span>
-                    <span>Closed</span>
-                  </div>
+                  {[
+                    {
+                      name: days[0].name,
+                      hours: days[0].hours,
+                    },
+                    {
+                      name: days[1].name,
+                      hours: days[1].hours,
+                    },
+                    {
+                      name: days[2].name,
+                      hours: days[2].hours,
+                    },
+                  ].map((day, index) => (
+                    <div key={index} className="flex justify-between">
+                      <span>{day.name}</span>
+                      <span>{day.hours}</span>
+                    </div>
+                  ))}
                 </div>
               </motion.div>
             </motion.div>
@@ -173,7 +193,7 @@ export function FooterSection() {
             >
               <Card className="border-border/50 shadow-lg">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-bold text-foreground mb-6">Send us a Message</h3>
+                  <h3 className="text-2xl font-bold text-foreground mb-6">{t("form.title")}</h3>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div>
@@ -181,7 +201,7 @@ export function FooterSection() {
                         htmlFor="name"
                         className="block text-sm font-medium text-foreground mb-2"
                       >
-                        Your Name
+                        {t("form.labels.name")}
                       </label>
                       <Input
                         id="name"
@@ -189,7 +209,7 @@ export function FooterSection() {
                         type="text"
                         value={formData.name}
                         onChange={handleInputChange}
-                        placeholder="Enter your full name"
+                        placeholder={t("form.placeholders.name")}
                         className="w-full"
                         required
                       />
@@ -200,7 +220,7 @@ export function FooterSection() {
                         htmlFor="email"
                         className="block text-sm font-medium text-foreground mb-2"
                       >
-                        Email Address
+                        {t("form.labels.email")}
                       </label>
                       <Input
                         id="email"
@@ -208,7 +228,7 @@ export function FooterSection() {
                         type="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        placeholder="Enter your email address"
+                        placeholder={t("form.placeholders.email")}
                         className="w-full"
                         required
                       />
@@ -219,14 +239,14 @@ export function FooterSection() {
                         htmlFor="message"
                         className="block text-sm font-medium text-foreground mb-2"
                       >
-                        Message
+                        {t("form.labels.message")}
                       </label>
                       <Textarea
                         id="message"
                         name="message"
                         value={formData.message}
                         onChange={handleInputChange}
-                        placeholder="Tell us about your travel plans..."
+                        placeholder={t("form.placeholders.message")}
                         className="w-full min-h-[120px] resize-none"
                         required
                       />
@@ -239,7 +259,7 @@ export function FooterSection() {
                         size="lg"
                       >
                         <Send className="mr-2 h-5 w-5" />
-                        Send Message
+                        {t("form.submitButton")}
                       </Button>
                     </motion.div>
                   </form>
@@ -261,8 +281,10 @@ export function FooterSection() {
               transition={{ duration: 0.6, delay: 1 }}
               className="flex items-center space-x-2"
             >
-              <img src="/images/logo.png" alt="" className="h-6 w-6" />
-              <span className="text-xl font-bold text-foreground">QHOME</span>
+              <a href="#">
+                <img src="/images/logo.png" alt="" className="h-6 w-6" />
+              </a>
+              <span className="text-xl font-bold text-foreground">{t("bottom.logo")}</span>
             </motion.div>
 
             {/* Social Links */}
@@ -288,24 +310,6 @@ export function FooterSection() {
                 </motion.a>
               ))}
             </motion.div>
-
-            {/* Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 20 }}
-              transition={{ duration: 0.6, delay: 1.4 }}
-              className="flex items-center space-x-6 text-sm text-muted-foreground"
-            >
-              <a href="#" className="hover:text-primary transition-colors duration-200">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-primary transition-colors duration-200">
-                Terms of Service
-              </a>
-              <a href="#" className="hover:text-primary transition-colors duration-200">
-                FAQ
-              </a>
-            </motion.div>
           </div>
 
           <motion.div
@@ -314,10 +318,7 @@ export function FooterSection() {
             transition={{ duration: 0.6, delay: 1.6 }}
             className="mt-6 pt-6 border-t border-border text-center text-sm text-muted-foreground"
           >
-            <p>
-              © 2024 QHome. All rights reserved. Made with ❤️ for travelers seeking authentic
-              experiences.
-            </p>
+            <p>{t("bottom.copyright", { year: new Date().getFullYear(), heart: "❤️" })}</p>
           </motion.div>
         </div>
       </div>

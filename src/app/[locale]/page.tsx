@@ -4,13 +4,13 @@ import { GallerySection } from "@/components/gallery-section";
 import { TestimonialsSection } from "@/components/testimonials-section";
 import { PricingSection } from "@/components/pricing-section";
 import { FooterSection } from "@/components/footer-section";
-import { Header } from "@/components/header";
+import { HeaderSection } from "@/components/header-section";
 import { FloatingContact } from "@/components/floating-contact";
 
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <Header />
+      <HeaderSection />
       <HeroSection />
       <FeaturesSection />
       <GallerySection />

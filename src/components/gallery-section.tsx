@@ -2,20 +2,23 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue } from "framer-motion";
+import { useTranslations } from "next-intl";
 import homestayData from "@/data/homestay-data";
 
 export function GallerySection() {
+  const t = useTranslations("GallerySection");
+  const gallery = t.raw("gallery") as {
+    image: string;
+    title: string;
+    description: string;
+  }[];
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const scrollX = useMotionValue(0);
   const ITEM_WIDTH = 280;
   const SPEED = 0.5;
 
-  const extendedGallery = [
-    ...homestayData.gallery,
-    ...homestayData.gallery,
-    ...homestayData.gallery,
-  ];
+  const extendedGallery = [...gallery, ...gallery, ...gallery];
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting), {
@@ -93,19 +96,19 @@ export function GallerySection() {
               textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
             }}
           >
-            EXPLORE
+            {t("explore")}
           </motion.h2>
           <motion.h2
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 50 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="text-5xl sm:text-6xl  lg:text-7xl font-black text-primary  leading-none tracking-tighter  self-end  relative z-0 text-end"
+            className="text-5xl sm:text-6xl lg:text-7xl font-black text-primary leading-none tracking-tighter self-end relative z-0 text-end"
             style={{
               fontFamily: "system-ui, -apple-system, sans-serif",
               textShadow: "2px 2px 4px rgba(0,0,0,0.1)",
             }}
           >
-            GOOD PLACES
+            {t("goodPlaces")}
           </motion.h2>
         </div>
       </div>

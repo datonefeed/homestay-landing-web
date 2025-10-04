@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Home } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { LanguageSwitcher } from "./language-switcher";
 
-export function Header() {
+export function HeaderSection() {
+  const t = useTranslations("HeaderSection");
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -18,12 +21,12 @@ export function Header() {
   }, []);
 
   const navItems = [
-    { href: "#home", label: "Home" },
-    { href: "#features", label: "Features" },
-    { href: "#gallery", label: "Gallery" },
-    { href: "#testimonials", label: "Reviews" },
-    { href: "#pricing", label: "Pricing" },
-    { href: "#contact", label: "Contact" },
+    { href: "#home", label: t("nav.home") },
+    { href: "#features", label: t("nav.features") },
+    { href: "#gallery", label: t("nav.gallery") },
+    { href: "#testimonials", label: t("nav.reviews") },
+    { href: "#pricing", label: t("nav.pricing") },
+    { href: "#contact", label: t("nav.contact") },
   ];
 
   return (
@@ -41,8 +44,10 @@ export function Header() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center space-x-2"
           >
-            <img src="/images/logo.png" alt="" className="h-6 w-6" />
-            <span className="text-xl font-bold text-foreground">QHOME</span>
+            <a href="#">
+              <img src="/images/logo.png" alt="" className="h-6 w-6" />
+            </a>
+            <span className="text-xl font-bold text-foreground">{t("brandName")}</span>
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -64,9 +69,7 @@ export function Header() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6 }}
             >
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                Book Now
-              </Button>
+              <LanguageSwitcher />
             </motion.div>
           </div>
 
@@ -104,9 +107,7 @@ export function Header() {
                   </a>
                 ))}
                 <div className="px-3 py-2">
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                    Book Now
-                  </Button>
+                  <LanguageSwitcher />
                 </div>
               </div>
             </motion.div>

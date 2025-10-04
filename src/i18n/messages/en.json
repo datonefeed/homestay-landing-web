@@ -1,0 +1,227 @@
+{
+  "HeaderSection": {
+    "brandName": "QHOME",
+    "nav": {
+      "home": "Home",
+      "features": "Features",
+      "gallery": "Gallery",
+      "reviews": "Reviews",
+      "pricing": "Pricing",
+      "contact": "Contact"
+    },
+    "bookNowButton": "Book Now"
+  },
+  
+  "HeroSection": {
+    "title": "Your Dream Homestay Awaits",
+    "subtitle": "Premium Properties",
+    "scrollToExpand": "Scroll to Explore"
+  },
+  "FeaturesSection": {
+    "title": "Why Choose Our Homestays?",
+    "description": "Experience authentic hospitality and create lasting memories with our carefully selected host families",
+    "features": [
+       {
+          "icon": "Home",
+          "title": "Authentic Local Experience",
+          "description": "Stay with local families and immerse yourself in genuine cultural experiences"
+        },
+        {
+          "icon": "MapPin",
+          "title": "Prime Locations",
+          "description": "Carefully selected homes in the heart of vibrant neighborhoods and scenic areas"
+        },
+        {
+          "icon": "Heart",
+          "title": "Comfort & Care",
+          "description": "Enjoy home-cooked meals, comfortable rooms, and personalized attention"
+        },
+        {
+          "icon": "DollarSign",
+          "title": "Great Value",
+          "description": "Affordable rates with breakfast, WiFi, and local guidance included"
+        }
+    ],
+    "stats": {
+      "happyGuests": "Happy Guests",
+      "hostFamilies": "Host Families",
+      "destinations": "Destinations",
+      "averageRating": "Average Rating"
+    }
+  },
+  "GallerySection": {
+    "explore": "EXPLORE",
+    "goodPlaces": "GOOD PLACES",
+    "gallery": [
+      {
+        "image": "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg",
+        "title": "Comfortable Bedrooms",
+        "description": "Rest in thoughtfully designed spaces"
+      },
+      {
+        "image": "https://images.pexels.com/photos/5661718/pexels-photo-5661718.jpeg",
+        "title": "Shared Dining",
+        "description": "Enjoy meals with your host family"
+      },
+      {
+        "image": "https://images.pexels.com/photos/10071390/pexels-photo-10071390.jpeg",
+        "title": "Scenic Views",
+        "description": "Wake up to breathtaking surroundings"
+      },
+      {
+        "image": "https://images.pexels.com/photos/15720195/pexels-photo-15720195.jpeg",
+        "title": "Common Areas",
+        "description": "Relax in welcoming shared spaces"
+      }
+    ]
+  },
+  "TestimonialsSection": {
+    "title": "What Our Guests Say",
+    "description": "Real experiences from travelers who have stayed with our host families around the world",
+    "testimonials": [     
+        {
+          "quote": "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+          "name": "Sarah Chen",
+          "designation": "Product Manager at TechFlow",
+          "src": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+        {
+          "quote": "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+          "name": "Michael Rodriguez",
+          "designation": "CTO at InnovateSphere",
+          "src": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+        {
+          "quote": "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
+          "name": "Emily Watson",
+          "designation": "Operations Director at CloudScale",
+          "src": "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+        {
+          "quote": "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+          "name": "James Kim",
+          "designation": "Engineering Lead at DataPro",
+          "src": "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        },
+        {
+          "quote": "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
+          "name": "Lisa Thompson",
+          "designation": "VP of Technology at FutureNet",
+          "src": "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        }
+    ]
+  },
+  "PricingSection": {
+    "title": "Choose Your Perfect Stay",
+    "description": "Transparent pricing with no hidden fees. All rates include breakfast, WiFi, and local guidance",
+    "mostPopular": "Most Popular",
+    "pricing": [
+      {
+        "name": "Standard Room",
+        "price": "$45",
+        "period": "per night",
+        "features": [
+          "Private bedroom",
+          "Shared bathroom",
+          "Breakfast included",
+          "WiFi access",
+          "Local guidance"
+        ],
+        "popular": false
+      },
+      {
+        "name": "Deluxe Room",
+        "price": "$65",
+        "period": "per night",
+        "features": [
+          "Private bedroom",
+          "Private bathroom",
+          "All meals included",
+          "WiFi access",
+          "Local tours",
+          "Airport pickup"
+        ],
+        "popular": true
+      },
+      {
+        "name": "Family Suite",
+        "price": "$95",
+        "period": "per night",
+        "features": [
+          "2 bedrooms",
+          "Private bathroom",
+          "All meals included",
+          "WiFi access",
+          "Local tours",
+          "Airport pickup",
+          "Laundry service"
+        ],
+        "popular": false
+      }
+    ],
+    "included": {
+      "title": "What is Included in Every Stay",
+      "items": [
+        { "title": "Clean & Comfortable Room" },
+        { "title": "Daily Breakfast" },
+        { "title": "Free WiFi" },
+        { "title": "Local Guidance" }
+      ],
+      "freeCancellation": "Free cancellation",
+      "cancellationPeriod": "up to 24 hours before check-in",
+      "noBookingFees": "No booking fees",
+      "support": "24/7 support"
+    }
+  },
+  "FooterSection": {
+    "title": "Get in Touch",
+    "description": "Ready to start your homestay adventure? We are here to help you find the perfect home away from home",
+    "contact": {
+      "title": "Contact Information",
+      "items": [
+        { "title": "Email" },
+        { "title": "Phone" },
+        { "title": "Address" }
+      ],
+      "businessHours": {
+        "title": "Business Hours",
+        "days": [
+          { "name": "Monday - Friday", "hours": "9:00 AM - 6:00 PM" },
+          { "name": "Saturday", "hours": "10:00 AM - 4:00 PM" },
+          { "name": "Sunday", "hours": "Closed" }
+        ]
+      }
+    },
+    "form": {
+      "title": "Send us a Message",
+      "labels": {
+        "name": "Your Name",
+        "email": "Email Address",
+        "message": "Message"
+      },
+      "placeholders": {
+        "name": "Enter your full name",
+        "email": "Enter your email address",
+        "message": "Tell us about your travel plans..."
+      },
+      "submitButton": "Send Message",
+      "messages": {
+        "success": "Your message has been sent successfully!",
+        "error": "An error occurred while sending your message. Please try again."
+      }
+    },
+    "bottom": {
+      "logo": "QHOME",
+      "links": {
+        "privacyPolicy": "Privacy Policy",
+        "termsOfService": "Terms of Service",
+        "faq": "FAQ"
+      },
+      "copyright": "© {year} QHome. All rights reserved. Made with {heart} for travelers seeking authentic experiences."
+    }
+  }
+
+
+
+
+}

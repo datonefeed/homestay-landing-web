@@ -2,10 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import homestayData from "@/data/homestay-data";
 import { AnimatedTestimonials } from "./ui/animated-testimonials";
 
 export function TestimonialsSection() {
+  const t = useTranslations("TestimonialsSection");
+  const testimonials = t.raw("testimonials") as {
+    quote: string;
+    name: string;
+    designation: string;
+    src: string;
+  }[];
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -40,13 +48,13 @@ export function TestimonialsSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4 text-balance">
-            What Our Guests Say
+            {t("title")}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            Real experiences from travelers who have stayed with our host families around the world
+            {t("description")}
           </p>
         </motion.div>
-        <AnimatedTestimonials testimonials={homestayData.testimonials} />
+        <AnimatedTestimonials testimonials={testimonials} />
       </div>
     </section>
   );
