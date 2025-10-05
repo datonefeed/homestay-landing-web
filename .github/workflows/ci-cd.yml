@@ -9,6 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    # Steps to deploy the Next.js app
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
