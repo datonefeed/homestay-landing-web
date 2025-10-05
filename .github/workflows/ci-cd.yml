@@ -38,22 +38,26 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
 
-          # Copy toàn bộ build output chuẩn
-          rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
-            .next/standalone/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/.next/standalone/
+          # Copy build output, đảm bảo tạo đúng cấu trúc thư mục .next/standalone
+            rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
+              .next/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/.next/
 
-          rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
-            .next/static/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/.next/static/
-
+          # Copy public folder
           rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
             public/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/public/
 
+
+          # Copy public folder (nếu có)
+          rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
+            public/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/public/
+
+          # Chạy PM2 trong VPS
           ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << 'EOF'
             cd $VPS_DEST_PATH
             if pm2 list | grep -q "nextjs-app"; then
               pm2 restart nextjs-app
             else
-              pm2 start server.js --name "nextjs-app"
+              pm2 start .next/standalone/server.js --name "nextjs-app"
             fi
           EOF
 
