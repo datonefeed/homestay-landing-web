@@ -27,7 +27,9 @@ jobs:
 
       # Step 4: Build Next.js app
       - name: Build Next.js app
-        run: npm run build
+        run: |
+          npm run build
+          npx next export
         env:
           NEXT_PUBLIC_BASE_URL: "https://landing.tpt.io.vn"
 
