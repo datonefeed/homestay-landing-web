@@ -3,13 +3,12 @@ name: Deploy Next.js (SSR) to VPS
 on:
   push:
     branches:
-      - master
+      - master # Hoặc main nếu bạn dùng main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # Steps to deploy the Next.js app
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -39,28 +38,40 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
 
-          # Copy build output, đảm bảo tạo đúng cấu trúc thư mục .next/standalone
-            rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
-              .next/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/.next/
+          # Copy .next/standalone (thay vì chỉ .next/)
+          rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
+            .next/standalone/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/
 
-          # Copy public folder
+          # Copy public folder (loại bỏ lệnh lặp)
           rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
             public/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/public/
 
-
-          # Copy public folder (nếu có)
+          # Copy .next/static (nếu cần cho static assets)
           rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
-            public/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/public/
+            .next/static/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/.next/static/
 
-          # Chạy PM2 trong VPS
+          # Chạy trên VPS: Cài dependencies (nếu cần), sau đó PM2
           ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << "EOF"
             cd $VPS_DEST_PATH
-            pwd
+            pwd  # Debug: In đường dẫn hiện tại
+            
+            # Cài dependencies nếu chưa có (standalone chỉ cần minimal, nhưng an toàn)
+            npm ci --production || echo "Dependencies already installed"
+            
+            # Kiểm tra server.js tồn tại
+            if [ ! -f ".next/standalone/server.js" ]; then
+              echo "Error: server.js not found!"
+              exit 1
+            fi
+            
+            # Khởi động/restart PM2
             if pm2 list | grep -q "nextjs-app"; then
               pm2 restart nextjs-app
             else
               pm2 start .next/standalone/server.js --name "nextjs-app"
             fi
+            
+            pm2 save  # Lưu config PM2
           EOF
 
           rm private_key
