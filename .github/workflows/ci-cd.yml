@@ -20,6 +20,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
+        # ⚠️ Nếu chưa có package-lock.json, đổi lại npm install
         run: npm ci
 
       - name: Build Next.js app
@@ -38,40 +39,38 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
 
-          # Copy .next/standalone (thay vì chỉ .next/)
+          echo "🟢 Copying Next.js standalone build to VPS..."
           rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
             .next/standalone/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/
 
-          # Copy public folder (loại bỏ lệnh lặp)
+          echo "🟢 Copying static and public assets..."
+          rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
+            .next/static/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/.next/static/
           rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
             public/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/public/
 
-          # Copy .next/static (nếu cần cho static assets)
-          rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
-            .next/static/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/.next/static/
-
-          # Chạy trên VPS: Cài dependencies (nếu cần), sau đó PM2
+          echo "🟢 Deploying on VPS via PM2..."
           ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << "EOF"
             cd $VPS_DEST_PATH
-            pwd  # Debug: In đường dẫn hiện tại
-            
-            # Cài dependencies nếu chưa có (standalone chỉ cần minimal, nhưng an toàn)
-            npm ci --production || echo "Dependencies already installed"
-            
-            # Kiểm tra server.js tồn tại
-            if [ ! -f ".next/standalone/server.js" ]; then
-              echo "Error: server.js not found!"
+            echo "📂 Current path: $(pwd)"
+
+            # ✅ Không cần npm ci vì standalone đã chứa node_modules
+            if [ ! -f "server.js" ]; then
+              echo "❌ Error: server.js not found in $(pwd)"
+              ls -la
               exit 1
             fi
-            
-            # Khởi động/restart PM2
+
             if pm2 list | grep -q "nextjs-app"; then
+              echo "♻️ Restarting PM2 app..."
               pm2 restart nextjs-app
             else
-              pm2 start .next/standalone/server.js --name "nextjs-app"
+              echo "🚀 Starting new PM2 app..."
+              pm2 start server.js --name "nextjs-app"
             fi
-            
-            pm2 save  # Lưu config PM2
+
+            pm2 save
+            pm2 status
           EOF
 
           rm private_key
