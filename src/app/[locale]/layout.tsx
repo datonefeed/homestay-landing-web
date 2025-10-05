@@ -1,5 +1,4 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
-import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import ScrollToTop from "@/components/scroll-to-top";
 
@@ -8,12 +7,37 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+// ⚙️ Khai báo các locale cần build tĩnh
+export async function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+// 🚫 Ép Next.js render static, không dùng dynamic
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
 export default async function LocaleLayout({ children, params }: Props) {
-  // Ensure that the incoming `locale` is valid
   const { locale } = await params;
+
+  // ❌ Không dùng notFound() vì static export không hỗ trợ
   if (!hasLocale(routing.locales, locale)) {
-    notFound();
+    return (
+      <html>
+        <body>
+          <p>Invalid locale: {locale}</p>
+        </body>
+      </html>
+    );
   }
 
-  return <NextIntlClientProvider locale={locale}>{children}</NextIntlClientProvider>;
+  return (
+    <html lang={locale}>
+      <body>
+        <NextIntlClientProvider locale={locale}>
+          <ScrollToTop />
+          {children}
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
 }

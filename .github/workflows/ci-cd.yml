@@ -1,4 +1,4 @@
-name: Deploy Next.js to VPS
+name: Deploy Next.js (SSR) to VPS
 
 on:
   push:
@@ -23,17 +23,16 @@ jobs:
 
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      # Step 4: Build Next.js app
+      # Step 4: Build Next.js app (SSR)
       - name: Build Next.js app
-        run: |
-          npm run build
-          npx next export
+        run: npm run build
         env:
           NEXT_PUBLIC_BASE_URL: "https://landing.tpt.io.vn"
+          NEXT_TELEMETRY_DISABLED: 1
 
-      # Step 5: Deploy to VPS
+      # Step 5: Deploy build to VPS
       - name: Deploy to VPS
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -41,17 +40,29 @@ jobs:
           VPS_USER: ${{ secrets.VPS_USER }}
           VPS_DEST_PATH: ${{ secrets.VPS_DEST_PATH }}
         run: |
-          # Install SSH key
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
 
-          # Copy build files to VPS
+          # Copy standalone build
           rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
-            ./out/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH
+            .next/standalone/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/
 
-          # Restart Nginx on VPS
-          ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST \
-            "sudo systemctl restart nginx"
+          # Copy static files
+          rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
+            .next/static/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/.next/static/
 
-          # Clean up
+          # Copy public folder
+          rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
+            public/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/public/
+
+          # Restart app via PM2 or systemd
+          ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << 'EOF'
+            cd $VPS_DEST_PATH
+            if pm2 list | grep -q "nextjs-app"; then
+              pm2 restart nextjs-app
+            else
+              pm2 start server.js --name "nextjs-app"
+            fi
+          EOF
+
           rm private_key
