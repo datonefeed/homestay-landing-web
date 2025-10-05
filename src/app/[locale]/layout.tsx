@@ -15,10 +15,5 @@ export default async function LocaleLayout({ children, params }: Props) {
     notFound();
   }
 
-  return (
-    <NextIntlClientProvider locale={locale}>
-      {children}
-      <ScrollToTop />
-    </NextIntlClientProvider>
-  );
+  return <NextIntlClientProvider locale={locale}>{children}</NextIntlClientProvider>;
 }
