@@ -10,25 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code from repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Step 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: "18"
           cache: "npm"
 
+      # Step 3: Install dependencies
       - name: Install dependencies
-        # ⚠️ Nếu chưa có package-lock.json, đổi lại npm install
         run: npm ci
 
+      # Step 4: Build Next.js app (SSR)
       - name: Build Next.js app
         run: npm run build
         env:
           NEXT_PUBLIC_BASE_URL: "https://landing.tpt.io.vn"
           NEXT_TELEMETRY_DISABLED: 1
 
+      # Step 5: Deploy build to VPS
       - name: Deploy to VPS
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -39,37 +43,27 @@ jobs:
           echo "$SSH_PRIVATE_KEY" > private_key
           chmod 600 private_key
 
-          # ✅ 1. Copy build output to VPS
+          # Copy standalone build folder (contains server.js)
           rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
             .next/standalone/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/
 
+          # Copy static assets
           rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
             .next/static/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/.next/static/
 
+          # Copy public folder (if any)
           rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
             public/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/public/
 
-          # ✅ 2. SSH into VPS and restart app
-          ssh -T -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << EOF
-            echo "📂 Deploying to: $VPS_DEST_PATH"
-            cd $VPS_DEST_PATH || { echo "❌ Directory not found"; exit 1; }
-
-            npm ci --production || echo "Dependencies already installed"
-
-            if [ ! -f ".next/standalone/server.js" ]; then
-              echo "❌ server.js not found!"
-              exit 1
-            fi
-
+          # Restart app via PM2
+          ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << EOF
+            cd $VPS_DEST_PATH
             if pm2 list | grep -q "nextjs-app"; then
-              echo "🔁 Restarting existing app..."
               pm2 restart nextjs-app
             else
-              echo "🚀 Starting new app..."
+              # ✅ CHÚ Ý: server.js nằm bên trong .next/standalone/
               pm2 start .next/standalone/server.js --name "nextjs-app"
             fi
-
-            pm2 save
           EOF
 
           rm private_key
