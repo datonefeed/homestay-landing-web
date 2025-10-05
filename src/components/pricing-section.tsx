@@ -77,7 +77,7 @@ export function PricingSection() {
               <Card
                 className={`h-full relative overflow-hidden transition-all duration-300 transform hover:-translate-y-2 ${
                   plan.popular
-                    ? "border-primary shadow-xl scale-105 bg-card"
+                    ? "border-primary shadow-xl lg:scale-105 bg-card"
                     : "border-border/50 hover:border-primary/20 hover:shadow-xl bg-card"
                 }`}
               >
