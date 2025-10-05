@@ -53,7 +53,7 @@ jobs:
             if pm2 list | grep -q "nextjs-app"; then
               pm2 restart nextjs-app
             else
-              pm2 start .next/standalone/server.js --name "nextjs-app"
+              pm2 start server.js --name "nextjs-app"
             fi
           EOF
 
