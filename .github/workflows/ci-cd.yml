@@ -1,0 +1,55 @@
+name: Deploy Next.js to VPS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build Next.js app
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_URL: "https://landing.tpt.io.vn"
+
+      # Step 5: Deploy to VPS
+      - name: Deploy to VPS
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_DEST_PATH: ${{ secrets.VPS_DEST_PATH }}
+        run: |
+          # Install SSH key
+          echo "$SSH_PRIVATE_KEY" > private_key
+          chmod 600 private_key
+
+          # Copy build files to VPS
+          rsync -avz --delete -e "ssh -i private_key -o StrictHostKeyChecking=no" \
+            ./out/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH
+
+          # Restart Nginx on VPS
+          ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST \
+            "sudo systemctl restart nginx"
+
+          # Clean up
+          rm private_key
