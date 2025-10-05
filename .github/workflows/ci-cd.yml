@@ -3,7 +3,7 @@ name: Deploy Next.js (SSR) to VPS
 on:
   push:
     branches:
-      - master # Hoặc main nếu bạn dùng main
+      - master
 
 jobs:
   deploy:
