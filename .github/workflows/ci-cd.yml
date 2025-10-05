@@ -52,7 +52,7 @@ jobs:
             public/ $VPS_USER@$VPS_HOST:$VPS_DEST_PATH/public/
 
           # Chạy PM2 trong VPS
-          ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << 'EOF'
+          ssh -i private_key -o StrictHostKeyChecking=no $VPS_USER@$VPS_HOST << "EOF"
             cd $VPS_DEST_PATH
             if pm2 list | grep -q "nextjs-app"; then
               pm2 restart nextjs-app
