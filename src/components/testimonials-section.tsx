@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import homestayData from "@/data/homestay-data";
+
 import { AnimatedTestimonials } from "./ui/animated-testimonials";
 
 export function TestimonialsSection() {

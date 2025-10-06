@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue } from "framer-motion";
 import { useTranslations } from "next-intl";
-import homestayData from "@/data/homestay-data";
 
 export function GallerySection() {
   const t = useTranslations("GallerySection");

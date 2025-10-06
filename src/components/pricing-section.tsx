@@ -1,13 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button } from "@/components/ui/button";
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Check, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import homestayData from "@/data/homestay-data";
-import { p } from "framer-motion/client";
 
 export function PricingSection() {
   const t = useTranslations("PricingSection");

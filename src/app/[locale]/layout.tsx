@@ -1,6 +1,5 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { routing } from "@/i18n/routing";
-import ScrollToTop from "@/components/scroll-to-top";
 
 type Props = {
   children: React.ReactNode;
@@ -33,10 +32,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider locale={locale}>
-          <ScrollToTop />
-          {children}
-        </NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale}>{children}</NextIntlClientProvider>
       </body>
     </html>
   );
