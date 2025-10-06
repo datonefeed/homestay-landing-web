@@ -6,19 +6,16 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-// ⚙️ Khai báo các locale cần build tĩnh
 export async function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-// 🚫 Ép Next.js render static, không dùng dynamic
 export const dynamic = "force-static";
 export const dynamicParams = false;
 
 export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  // ❌ Không dùng notFound() vì static export không hỗ trợ
   if (!hasLocale(routing.locales, locale)) {
     return (
       <html>
@@ -29,10 +26,15 @@ export default async function LocaleLayout({ children, params }: Props) {
     );
   }
 
+  // Load messages for the current locale
+  const messages = (await import(`@/i18n/messages/${locale}.json`)).default;
+
   return (
     <html lang={locale}>
       <body>
-        <NextIntlClientProvider locale={locale}>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
